@@ -1,0 +1,12 @@
+sudo systemctl stop containerd
+sudo vim /etc/containerd/config.toml
+默认是：root = "/var/lib/containerd"
+修改为：root = "/data/containerd"
+
+sudo mkdir -p /data/containerd
+sudo rsync -avzh /var/lib/containerd/ /data/containerd/
+sudo systemctl start containerd
+sudo systemctl status containerd
+sudo crictl info | grep -i root
+du -lh --max-depth=1 /data/containerd
+
